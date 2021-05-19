@@ -1,49 +1,8 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Image,
-  Text,
-  Button,
-  StyleSheet,
-  ScrollView, TouchableOpacity
-} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-const HomeScreen = ({ navigation }) => {
-
-  const AppButtonproduct = ({ onPress, title }) => (
-    <TouchableOpacity
-
-      style={styles.custom}
-
-      onPress={() => navigation.navigate('ManageProductsScreen')}
-    >
-      <Text style={styles.customcolor}>{title}</Text>
-    </TouchableOpacity>
-  );
-
-
-  const AppButtonemployee = ({ onPress, title }) => (
-    <TouchableOpacity
-
-      style={styles.custom}
-      onPress={() => navigation.navigate('ManageEmployeesScreen')}
-    >
-      <Text style={styles.customcolor}>{title}</Text>
-    </TouchableOpacity>
-  );
-
-
-  const AppButtonorder = ({ onPress, title }) => (
-    <TouchableOpacity
-
-      style={styles.custom}
-      onPress={() => navigation.navigate('ManageOrdersScreen')}
-    >
-      <Text style={styles.customcolor}>{title}</Text>
-    </TouchableOpacity>
-  );
+import { Text, View, StyleSheet, Pressable, TouchableOpacity, ScrollView, Image,Button } from 'react-native';
+import Constants from 'expo-constants';
 
 
 
@@ -52,646 +11,459 @@ const HomeScreen = ({ navigation }) => {
 
 
 
-  return (
+const homescreen = ({ navigation }) => {
+  return(
+    <View style = {{backgroundColor: 'white', height: '100%'}}>
+
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.topheading}>Online Store</Text>
-      </View>
-      <View style={styles.buttons}>
+    <TouchableOpacity  style={styles.custombutton} onPress={() => navigation.navigate("Allproducts")}>
+      <Text style= {styles.custombtntext}> MANAGE PRODUCTS </Text>
+      </TouchableOpacity>
 
-        <View style={styles.custombtn}>
-          <AppButtonproduct title="Manage Product" size="sm" backgroundColor="blue"
+        <TouchableOpacity style={styles.custombutton} onPress={() => navigation.navigate("Allemployees")}>
+      <Text style= {styles.custombtntext}> MANAGE EMPLOYERS </Text>
+      </TouchableOpacity>
 
-            style={styles.mybtn}
+        <TouchableOpacity style={styles.custombutton} onPress={() => navigation.navigate("Allorders")}>
+      <Text style= {styles.custombtntext}> MANAGE ORDERS </Text>
+      </TouchableOpacity>
 
-          />
-        </View>
-
-        <View style={styles.custombtn}>
-          <AppButtonemployee title="Manage Employee" size="sm" backgroundColor="blue"
-
-            style={styles.mybtn}
-
-          />
-        </View>
-        <View style={styles.custombtn}>
-          <AppButtonorder title="Manage Order" size="sm" backgroundColor="blue"
-
-            style={styles.mybtn}
-
-          />
-
-        </View>
-
-
-      </View>
+    </View>
+      
     </View>
   );
-};
-const ManageProductsScreen = ({ navigation }) => {
-  const [getProductsList, setProductsList] = useState([
+}
+const Allproducts = ( { navigation } ) =>{
+ const [list, setlist] = useState([
     {
-      id: 1,
+     id: 1,
       img:
         'https://cmsimages.tribuneindia.com/gallary_content/2020/7/2020_7$largeimg_1727377222.jpeg',
       name: 'Fair n Lovely',
       price: '300',
-      manufacturer: 'Ali',
-      category: 'Cosmetics',
+      category: 'Cream',
     },
-    {
-      id: 2,
+     {
+     id: 2,
       img:
         'https://i.pinimg.com/originals/30/1e/26/301e26a0b11c51be50b5b16131088527.jpg',
       name: 'Chocolate',
       price: '500',
-      manufacturer: 'Abbas',
       category: 'Breakfast',
     },
-    {
+     {
       id: 3,
       img:
         'https://5.imimg.com/data5/GF/GT/SK/SELLER-79616619/chocolate-chip-cookies-500x500.jpg',
       name: 'Yum Yum',
-      price: '800',
-      manufacturer: 'Zahid',
+      price: '800',    
       category: 'Cookies',
     },
-    {
-      id: 4,
-      img:
-        'https://static1.buchi.com/sites/default/files/styles/content_large/public/application-note-images/swede-cakes-2123192_1920.jpg?itok=Fw1yHh8Q',
-      name: 'Choco Bread',
-      price: '900',
-      manufacturer: 'Irfan',
-      category: 'Bakery',
-    },
-  ]);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ScrollView style={styles.sView}>
-        <View style={styles.slist}>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Image</Text>
-            {getProductsList.map((item) => (
-              <Text
-                onPress={() =>
-                  navigation.navigate('ProductDetailsScreen', {
-                    id: item.id,
-                    img: item.img,
-                    name: item.name,
-                    price: item.price,
-                    manufacturer: item.manufacturer,
-                    category: item.category,
-                  })
-                }
-                style={{ paddingTop: '15%', margin: 10 }}>
-                <Image
-                  style={styles.tinyLogo}
-                  source={{
-                    uri: item.img,
-                  }}
-                />
-                {'\n'}
-              </Text>
-            ))}
-          </View>
-
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Products</Text>
-            {getProductsList.map((item) => (
-              <Text
-                onPress={() =>
-                  navigation.navigate('ProductDetailsScreen', {
-                    id: item.id,
-                    img: item.img,
-                    name: item.name,
-                    price: item.price,
-                    manufacturer: item.manufacturer,
-                    category: item.category,
-                  })
-                }
-                style={{ paddingTop: '25%', height: '50%', margin: 10 }}>
-                {item.name}
-                {'\n'}
-              </Text>
-            ))}
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Price</Text>
-            {getProductsList.map((item) => (
-              <Text
-                onPress={() =>
-                  navigation.navigate('ProductDetailsScreen', {
-                    id: item.id,
-                    img: item.img,
-                    name: item.name,
-                    price: item.price,
-                    manufacturer: item.manufacturer,
-                    category: item.category,
-                  })
-                }
-                style={{ paddingTop: '50%', height: '50%', margin: 10 }}>
-                {item.price}
-                {'\n'}
-              </Text>
-            ))}
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.buttons}>
-        <Button title="Back" onPress={() => navigation.goBack()} />
-      </View>
+ ]);
+  return( 
+     <View style = {{backgroundColor: 'white', height: '100%'}}>
+     <View> 
+            <View style= {styles.columns}> 
+            <Text style={styles.columnheader}> Image </Text>
+            <Text style={styles.columnheader}> Name </Text>
+            <Text style={styles.columnheader}> Price </Text>
+             </View>
+      </View> 
+    <ScrollView> 
+      <View> 
+      <View> 
+          {
+            list.map((item) => 
+            <View  style={ styles.columns}> 
+            <Text
+             onPress = {() =>
+              navigation.navigate('productedetails', {
+                id: item.id, 
+                img: item.img,
+                name: item.name,
+                price: item.price,
+                category: item.category
+              })
+            }> <Image style={styles.myimage} source={{ uri: item.img }} /> </Text> 
+            <Text style= {{lineHeight: 55}}
+            onPress = {() =>
+              navigation.navigate('productdetails', {
+                id: item.id, 
+                img: item.img,
+                name: item.name,
+                price: item.price,
+                category: item.category
+              })
+            }
+            > {item.name} </Text>
+            <Text style= {{lineHeight: 55}}
+            onPress = {() =>
+              navigation.navigate('productdetails', {
+                id: item.id, 
+                img: item.img,
+                name: item.name,
+                price: item.price,
+                category: item.category
+              })
+            }
+            > {item.price} </Text>
+             </View>
+            ) 
+          }
+      </View> 
+      </View>  
+    </ScrollView>
     </View>
-  );
-};
-const ProductDetailsScreen = ({ navigation, route }) => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ScrollView style={styles.sView}>
-        <View style={styles.list}>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Id</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.id}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Image</Text>
-            <Image
-              style={styles.tinyLogo}
-              source={{
-                uri: route.params.img,
-              }}
-            />
-          </View>
-
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Product Name</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.name}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Price</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.price}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Manufacturer</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.manufacturer}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Category</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.category}
-              {'\n'}
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.buttons}>
-        <Button title="Back" onPress={() => navigation.goBack()} />
-        <Button title="Home" onPress={() => navigation.popToTop()} />
-      </View>
-    </View>
-  );
-};
-const ManageEmployeesScreen = ({ navigation }) => {
-  const [getEmployeesList, setEmployeesList] = useState([
-    {
-      id: 1,
-      name: 'Employee1',
-      designation: 'Cashier',
-      workingShift: 'Day',
-      salary: '40000 RS',
-    },
-    {
-      id: 2,
-      name: 'Employee2',
-      designation: 'Store Manager',
-      workingShift: 'Day/Night',
-      salary: '80000 RS',
-    },
-    {
-      id: 3,
-      name: 'Employee3',
-      designation: 'Assistant Store Manager',
-      workingShift: 'Day/Night',
-      salary: '60000 RS',
-    },
-    {
-      id: 4,
-      name: 'Employee4',
-      designation: 'Inventory Control Specialist',
-      workingShift: 'Night',
-      salary: '50000 RS',
-    },
-  ]);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ScrollView style={styles.sView}>
-        <View style={styles.slist}>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>
-              Employee Name
-            </Text>
-            {getEmployeesList.map((item) => (
-              <Text
-                onPress={() =>
-                  navigation.navigate('EmployeeDetailsScreen', {
-                    id: item.id,
-                    name: item.name,
-                    designation: item.designation,
-                    workingShift: item.workingShift,
-                    salary: item.salary,
-                  })
-                }
-                style={{ margin: 10 }}>
-                {item.name}
-                {'\n'}
-              </Text>
-            ))}
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Designation</Text>
-            {getEmployeesList.map((item) => (
-              <Text
-                onPress={() =>
-                  navigation.navigate('EmployeeDetailsScreen', {
-                    id: item.id,
-                    name: item.name,
-                    designation: item.designation,
-                    workingShift: item.workingShift,
-                    salary: item.salary,
-                  })
-                }
-                style={{ margin: 10 }}>
-                {item.designation}
-                {'\n'}
-              </Text>
-            ))}
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.buttons}>
-        <Button title="Back" onPress={() => navigation.goBack()} />
-      </View>
-    </View>
-  );
-};
-const EmployeeDetailsScreen = ({ navigation, route }) => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ScrollView style={styles.sView}>
-        <View style={styles.list}>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Id</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.id}
-              {'\n'}
-            </Text>
-          </View>
-
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>
-              Employee Name
-            </Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.name}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Designation</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.designation}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>
-              Working Shift
-            </Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.workingShift}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Salary</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.salary}
-              {'\n'}
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.buttons}>
-        <Button title="Back" onPress={() => navigation.goBack()} />
-        <Button title="Home" onPress={() => navigation.popToTop()} />
-      </View>
-    </View>
-  );
-};
-const ManageOrdersScreen = ({ navigation }) => {
-  const [getOrdersList, setOrdersList] = useState([
-    {
-      id: 1,
-      orderNo: '1',
-      productName: 'Fair n Lovely',
-      price: '300 RS',
-      customerInfo: 'Abbas',
-      orderDate: '2020-12-18',
-      shippingStatus: 'On Going',
-    },
-    {
-      id: 2,
-      orderNo: '2',
-      productName: 'Morning Chocolate',
-      price: '500 RS',
-      customerInfo: 'Hamid',
-      orderDate: '2020-12-18',
-      shippingStatus: 'Delivered',
-    },
-    {
-      id: 3,
-      orderNo: '3',
-      productName: 'Product3',
-      price: '800 RS',
-      customerInfo: 'Kamran',
-      orderDate: '2020-12-18',
-      shippingStatus: 'Delivered',
-    },
-    {
-      id: 4,
-      orderNo: '4',
-      productName: 'Choco Bread',
-      price: '900 RS',
-      customerInfo: 'Rizwan',
-      orderDate: '2020-12-18',
-      shippingStatus: 'On Going',
-    },
-  ]);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ScrollView style={styles.sView}>
-        <View style={styles.slist}>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Order No.</Text>
-            {getOrdersList.map((item) => (
-              <Text
-                onPress={() =>
-                  navigation.navigate('OrderDetailsScreen', {
-                    id: item.id,
-                    orderNo: item.orderNo,
-                    productName: item.productName,
-                    price: item.price,
-                    customerInfo: item.customerInfo,
-                    orderDate: item.orderDate,
-                    shippingStatus: item.shippingStatus,
-                  })
-                }
-                style={{ margin: 10 }}>
-                {item.orderNo}
-                {'\n'}
-              </Text>
-            ))}
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Product Name</Text>
-            {getOrdersList.map((item) => (
-              <Text
-                onPress={() =>
-                  navigation.navigate('OrderDetailsScreen', {
-                    id: item.id,
-                    orderNo: item.orderNo,
-                    productName: item.productName,
-                    price: item.price,
-                    customerInfo: item.customerInfo,
-                    orderDate: item.orderDate,
-                    shippingStatus: item.shippingStatus,
-                  })
-                }
-                style={{ margin: 10 }}>
-                {item.productName}
-                {'\n'}
-              </Text>
-            ))}
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Price</Text>
-            {getOrdersList.map((item) => (
-              <Text
-                onPress={() =>
-                  navigation.navigate('OrderDetailsScreen', {
-                    id: item.id,
-                    orderNo: item.orderNo,
-                    productName: item.productName,
-                    price: item.price,
-                    customerInfo: item.customerInfo,
-                    orderDate: item.orderDate,
-                    shippingStatus: item.shippingStatus,
-                  })
-                }
-                style={{ margin: 10 }}>
-                {item.price}
-                {'\n'}
-              </Text>
-            ))}
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.buttons}>
-        <Button title="Back" onPress={() => navigation.goBack()} />
-      </View>
-    </View>
-  );
-};
-const OrderDetailsScreen = ({ navigation, route }) => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ScrollView style={styles.sView}>
-        <View style={styles.list}>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Id</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.id}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Order No.</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.orderNo}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Product Name</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.productName}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Price</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.price}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>
-              Customer Info
-            </Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.customerInfo}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>Order Date</Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.orderDate}
-              {'\n'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ margin: 10, fontWeight: 'bold' }}>
-              Shipping Status
-            </Text>
-            <Text style={{ margin: 10 }}>
-              {route.params.shippingStatus}
-              {'\n'}
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.buttons}>
-        <Button title="Back" onPress={() => navigation.goBack()} />
-        <Button title="Home" onPress={() => navigation.popToTop()} />
-      </View>
-    </View>
-  );
-};
-
-const Stack = createStackNavigator();
-
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName={'Home'}
-        screenOptions={{ headerStyle: { backgroundColor: "lightblue" } }}>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ManageProductsScreen"
-          component={ManageProductsScreen}
-          options={{ title: 'Products', headerTitleAlign: 'center' }}
-        />
-        <Stack.Screen
-          name="ProductDetailsScreen"
-          component={ProductDetailsScreen}
-          options={{ title: 'Product Details', headerTitleAlign: 'center' }}
-        />
-        <Stack.Screen
-          name="ManageEmployeesScreen"
-          component={ManageEmployeesScreen}
-          options={{ title: 'Employees', headerTitleAlign: 'center' }}
-        />
-        <Stack.Screen
-          name="EmployeeDetailsScreen"
-          component={EmployeeDetailsScreen}
-          options={{ title: 'Employee Details', headerTitleAlign: 'center' }}
-        />
-        <Stack.Screen
-          name="ManageOrdersScreen"
-          component={ManageOrdersScreen}
-          options={{ title: 'Orders', headerTitleAlign: 'center' }}
-        />
-        <Stack.Screen
-          name="OrderDetailsScreen"
-          component={OrderDetailsScreen}
-          options={{ title: 'Order Details', headerTitleAlign: 'center' }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 
+
+
+
+const productdetails = ( { navigation, route } ) =>{
+
+  return(
+    <View style = {{backgroundColor: 'white', height: '100%'}}> 
+       <Image style={styles.titleimage} source={{ uri: route.params.img}} /> 
+
+       <View style={styles.detailrow}>
+       <Text> Product ID:  {route.params.id} </Text> 
+       <Text> Name: {route.params.name} </Text> 
+       </View> 
+
+      <View  style={styles.detailrow} > 
+      <Text> Price: {route.params.price} </Text> 
+       <Text> Category: {route.params.category} </Text> 
+      </View>
+    </View>
+  );
+}
+
+
+const Allemployees = ( {navigation }) =>{
+  const[list, setlist] = useState([
+     {
+      id: 1,
+      img:
+        'https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg',
+      name: 'Danish',
+      salary: '50000',
+      designation: 'Manager',
+      shift: 'Day',
+    },
+     {
+      id: 2,
+      img:
+        'https://cdn2.vectorstock.com/i/1000x1000/41/11/flat-business-woman-user-profile-avatar-icon-vector-4334111.jpg',
+      name: 'Malaika',
+      salary: '100000',
+      designation: 'Manager',
+      shift: 'Day',
+    },
+     {
+      id: 3,
+      img:
+        'https://www.pinclipart.com/picdir/middle/355-3553881_stockvader-predicted-adig-user-profile-icon-png-clipart.png',
+      name: 'Maleeka',
+      salary: '20000',
+      designation: 'Manager',
+      shift: 'Day',
+    },
+  ]);
+  return(
+      <View style = {{backgroundColor: 'white', height: '100%'}}>
+     <View> 
+            <View style= {styles.columns}> 
+            <Text style={styles.columnheader}> Image </Text>
+            <Text style={styles.columnheader}> Name </Text>
+            <Text style={styles.columnheader}> Salary </Text>
+             </View>
+      </View> 
+    <ScrollView> 
+      <View> 
+
+      <View> 
+          {
+            list.map((item) => 
+            <View  style={styles.columns}> 
+            <Text
+             onPress = {() =>
+              navigation.navigate('employeedetails', {
+                id: item.id, 
+                img: item.img,
+                name: item.name,
+                salary: item.salary,
+                shift: item.shift,
+                designation: item.designation
+              })
+            }> <Image style={styles.myimage} source={{ uri: item.img }} /> </Text> 
+            <Text style= {{lineHeight: 55}}
+            onPress = {() =>
+              navigation.navigate('employeedetails', {
+                id: item.id, 
+                img: item.img,
+                name: item.name,
+                salary: item.salary,
+                shift: item.shift,
+                designation: item.designation
+              })
+            }
+            > {item.name} </Text>
+            <Text style= {{lineHeight: 55}}
+            onPress = {() =>
+              navigation.navigate('employeedetails', {
+                id: item.id, 
+                img: item.img,
+                name: item.name,
+                salary: item.salary,
+                shift: item.shift,
+                designation: item.designation
+              })
+            }
+            > {item.salary} </Text>
+             </View>
+            ) 
+          }
+      </View> 
+      </View>  
+    </ScrollView>
+    </View>
+  ); 
+}
+
+
+const employeedetails = ({navigation, route}) => {
+  return(
+     <View style = {{backgroundColor: 'white', height: '100%'}}> 
+       <Image style={styles.titleimage} source={{ uri: route.params.img}} /> 
+
+       <View style={styles.detailrow}>
+       <Text> Employee ID:  {route.params.id} </Text> 
+       <Text> Name: {route.params.name} </Text> 
+       </View> 
+
+      <View  style={styles.detailrow} > 
+      <Text> salary: {route.params.salary} </Text> 
+       <Text> Designation: {route.params.designation} </Text> 
+      </View>
+
+        <Text  style={styles.detailrow}> shift: {route.params.shift} </Text> 
+    </View>
+  );
+}
+const Allorders =({navigation}) => {
+  const[list, setlist] = useState([
+     {
+      id: 1,
+      product: 'Fair Lovely',
+      price: 200,
+      customer: 'Danish',
+    },
+     {
+      id: 2,
+      product: 'Cake',
+      price: 200,
+      customer: 'Danish',
+    },
+     {
+      id: 3,
+      product: 'Choco',
+      price: 200,
+      customer: 'Danish',
+    },
+  ]);
+  
+return(
+      <View style = {{backgroundColor: 'white', height: '100%'}}>
+     <View> 
+            <View style= {styles.columns}> 
+            <Text style={styles.columnheader}> ID </Text>
+            <Text style={styles.columnheader}> Product </Text>
+            <Text style={styles.columnheader}> Bill </Text>
+             </View>
+      </View> 
+    <ScrollView> 
+      <View> 
+
+      <View> 
+          {
+            list.map((item) => 
+            <View  style={styles.columns}> 
+            <Text
+             onPress = {() =>
+              navigation.navigate('orderdetails', {
+                id: item.id, 
+                product: item.product,
+                customer: item.customer,
+                price: item.price,
+              })
+            }> {item.id} </Text> 
+            <Text 
+            onPress = {() =>
+              navigation.navigate('orderdetails', {
+                 id: item.id, 
+                product: item.product,
+                customer: item.customer,
+                price: item.price,
+              })
+            }
+            > {item.product} </Text>
+            <Text
+            onPress = {() =>
+              navigation.navigate('orderdetails', {
+                id: item.id, 
+                product: item.product,
+                customer: item.customer,
+                price: item.price,
+              })
+            }
+            > {item.price} </Text>
+             </View>
+            ) 
+          }
+      </View> 
+      </View>  
+    </ScrollView>
+    </View>
+  ); 
+}
+const orderdetails =({navigation, route }) =>{
+   return(
+    <View style = {{backgroundColor: 'white', height: '100%'}}> 
+
+       <View style={styles.detailrow}>
+       <Text> Product ID:  {route.params.id} </Text> 
+       <Text> Product: {route.params.product} </Text> 
+       </View> 
+
+      <View  style={styles.detailrow} > 
+      <Text> Customer: {route.params.customer} </Text> 
+       <Text> Bill: {route.params.price} </Text> 
+      </View>
+    </View>
+  );
+
+}
+
+
+
+
+
+
+
+
+
+const Stack = createStackNavigator();
+export default function App(){
+  return(
+    <View style={styles.container}>
+
+<NavigationContainer>
+
+<Stack.Navigator  initialRouteName={"home"}> 
+          <Stack.Screen
+          name="home"
+          component={homescreen}
+          options={{ title: 'Online Store', headerTitleAlign: 'center' }}
+        /> 
+
+ <Stack.Screen
+          name = "Allproducts"
+          component={Allproducts}
+          options={{ title: 'Our Products', headerTitleAlign: 'center' }}
+        />
+
+
+<Stack.Screen 
+          name = 'productdetails'
+          component = {productdetails}
+           options={{ title: 'Product Detail', headerTitleAlign: 'center' }} />
+
+  <Stack.Screen 
+          name = "Allemployees"
+          component = {Allemployees}
+          options={{ title: 'Our Employees', headerTitleAlign: 'center' }} 
+        />
+
+<Stack.Screen
+          name = "employeedetails"
+          component = {employeedetails}
+          options={{ title: 'Employee Detail', headerTitleAlign: 'center' }} 
+        />
+
+
+ <Stack.Screen
+        name= "Allorders"
+        component = {Allorders}
+        options={{ title: 'Orders Placed', headerTitleAlign: 'center' }} 
+        />
+<Stack.Screen
+        name= "orderdetails"
+        component = {orderdetails}
+        options={{ title: 'Orders Details', headerTitleAlign: 'center' }} 
+        />
+
+      </Stack.Navigator>
+
+
+
+
+</NavigationContainer>
+
+
+
+
+
+    </View>
+
+  )
+}
+
+
+
+
+
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center' },
-  slist: {
-    marginBottom: 3,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: "#FF9393",
   },
-  list: {
-    marginBottom: 3,
-    flexDirection: 'column',
+  custombutton:{
+    marginTop: 15, 
+    marginBottom: 15,
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
-  sView: {
-    textAlign: 'center',
-    backgroundColor: 'white',
+  custombtntext: {
+    color: 'white',
+    backgroundColor: '#DB2929',
     padding: 20,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    flexDirection: "column"
+    borderRadius: 50,
   },
-  tinyLogo: {
+   columns: {
+    flexDirection: 'row',
+    justifyContent:"space-between",
+    padding: 15,
+    alignItems:"center"
+    
+  }, 
+  columnheader: {
+    fontWeight: 'bold',
+    lineHeight: 30,
+
+  } ,myimage: {
     width: 50,
     height: 50,
   },
-  buttons: {
-    margin: 10,
-    flexDirection: 'column',
-    justifyContent: 'space-around',
+  titleimage: {
+    width: '100%',
+    height: 220,
   },
-  mybtn: {
-    backgroundColor: "blue",
-    padding: 5
-  }
-  , custombtn: {
-    color: "white",
-    marginTop: 10,
-
-  }, header: {
-    textAlign: "center",
-    backgroundColor: "black"
-    , width: "100%"
-
-
-  },
-  topheading: {
-    paddingVertical: 10,
-    color: "white",
-    fontWeight: 'bold',
-
-
-  }
-  , custom: {
-    backgroundColor: "darkorange", color: "white", padding: 10, width: "100%", textAlign: "center",
-    borderRadius: 50
-  }
-  , customcolor: {
-    color: "white"
+  detailrow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
   }
 });
 
-export default App;
+
