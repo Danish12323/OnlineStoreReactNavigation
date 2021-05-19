@@ -5,45 +5,45 @@ import {
   Text,
   Button,
   StyleSheet,
-  ScrollView,TouchableOpacity
+  ScrollView, TouchableOpacity
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const HomeScreen = ({ navigation }) => {
 
-const AppButtonproduct = ({ onPress, title }) => (
-  <TouchableOpacity 
-  
-  style={styles.custom}
-  
-   onPress={() => navigation.navigate('ManageProductsScreen')}
-   >
-    <Text style={styles.customcolor}>{title}</Text>
-  </TouchableOpacity>
-);
+  const AppButtonproduct = ({ onPress, title }) => (
+    <TouchableOpacity
+
+      style={styles.custom}
+
+      onPress={() => navigation.navigate('ManageProductsScreen')}
+    >
+      <Text style={styles.customcolor}>{title}</Text>
+    </TouchableOpacity>
+  );
 
 
-const AppButtonemployee = ({ onPress, title }) => (
-  <TouchableOpacity 
-  
-  style={styles.custom}
-    onPress={() => navigation.navigate('ManageEmployeesScreen')}
-   >
-    <Text style={styles.customcolor}>{title}</Text>
-  </TouchableOpacity>
-);
+  const AppButtonemployee = ({ onPress, title }) => (
+    <TouchableOpacity
+
+      style={styles.custom}
+      onPress={() => navigation.navigate('ManageEmployeesScreen')}
+    >
+      <Text style={styles.customcolor}>{title}</Text>
+    </TouchableOpacity>
+  );
 
 
-const AppButtonorder = ({ onPress, title }) => (
-  <TouchableOpacity 
-  
- style={styles.custom}
-    onPress={() => navigation.navigate('ManageOrdersScreen')}
-   >
-    <Text style={styles.customcolor}>{title}</Text>
-  </TouchableOpacity>
-);
+  const AppButtonorder = ({ onPress, title }) => (
+    <TouchableOpacity
+
+      style={styles.custom}
+      onPress={() => navigation.navigate('ManageOrdersScreen')}
+    >
+      <Text style={styles.customcolor}>{title}</Text>
+    </TouchableOpacity>
+  );
 
 
 
@@ -54,34 +54,34 @@ const AppButtonorder = ({ onPress, title }) => (
 
   return (
     <View style={styles.container}>
-  <View style={styles.header}>
-<Text style={styles.topheading}>Online Store</Text>
-</View>
+      <View style={styles.header}>
+        <Text style={styles.topheading}>Online Store</Text>
+      </View>
       <View style={styles.buttons}>
 
-<View style={styles.custombtn}>
-  <AppButtonproduct title="Manage Product" size="sm" backgroundColor="blue"
-  
-  style={styles.mybtn}
-  
-   />
-</View>
+        <View style={styles.custombtn}>
+          <AppButtonproduct title="Manage Product" size="sm" backgroundColor="blue"
 
-<View style={styles.custombtn}>
-<AppButtonemployee title="Manage Employee" size="sm" backgroundColor="blue"
-  
-  style={styles.mybtn}
-  
-   />
-</View>
-<View style={styles.custombtn}>
-<AppButtonorder title="Manage Order" size="sm" backgroundColor="blue"
-  
-  style={styles.mybtn}
-  
-   />
+            style={styles.mybtn}
 
-</View>
+          />
+        </View>
+
+        <View style={styles.custombtn}>
+          <AppButtonemployee title="Manage Employee" size="sm" backgroundColor="blue"
+
+            style={styles.mybtn}
+
+          />
+        </View>
+        <View style={styles.custombtn}>
+          <AppButtonorder title="Manage Order" size="sm" backgroundColor="blue"
+
+            style={styles.mybtn}
+
+          />
+
+        </View>
 
 
       </View>
@@ -592,7 +592,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={'Home'}
-       screenOptions={{ headerStyle: {backgroundColor:"lightblue"}} }>
+        screenOptions={{ headerStyle: { backgroundColor: "lightblue" } }}>
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -642,7 +642,7 @@ const styles = StyleSheet.create({
   },
   list: {
     marginBottom: 3,
-    flexDirection: '1',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -650,9 +650,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'white',
     padding: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection:"row"
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    flexDirection: "column"
   },
   tinyLogo: {
     width: 50,
@@ -663,32 +663,34 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
-  mybtn:{
-    backgroundColor:"blue",
-    padding:5
+  mybtn: {
+    backgroundColor: "blue",
+    padding: 5
   }
-  ,custombtn:{
-   color:"white" ,
-   marginTop:10,
-   
-  },header:{
-textAlign:"center",
-backgroundColor:"black"
-,width:"100%"
+  , custombtn: {
+    color: "white",
+    marginTop: 10,
+
+  }, header: {
+    textAlign: "center",
+    backgroundColor: "black"
+    , width: "100%"
 
 
   },
-  topheading:{
-    paddingVertical:10,
-    color:"white",
-    fontWeight:600,
+  topheading: {
+    paddingVertical: 10,
+    color: "white",
+    fontWeight: 'bold',
 
-    
+
   }
-  ,custom:{backgroundColor:"darkorange",color:"white",padding:10,width:"100%",textAlign:"center",
-  borderRadius:50}
-  ,customcolor:{
-    color:"white"
+  , custom: {
+    backgroundColor: "darkorange", color: "white", padding: 10, width: "100%", textAlign: "center",
+    borderRadius: 50
+  }
+  , customcolor: {
+    color: "white"
   }
 });
 
